@@ -1,0 +1,17 @@
+@model EditUserGroupViewModel
+@using OrchardCore.Entities
+@using OrchardCore.Users.ViewModels
+
+
+<input asp-for="Id" type="hidden" />
+
+<fieldset class="form-group">
+    <label asp-for="GroupName">@T["Group name"]</label>
+    <div class="input-group row col-md-4">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-users"></i></span>
+        </div>
+        <input asp-for="GroupName" class="form-control" autofocus />
+        <span asp-validation-for="GroupName" class="text-danger">@T["The group name is required."]</span>
+    </div>
+</fieldset>
