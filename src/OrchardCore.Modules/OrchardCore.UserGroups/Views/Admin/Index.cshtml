@@ -1,0 +1,29 @@
+﻿@model UserGroupIndexViewModel
+
+
+<h1>@RenderTitleSegments(T["User Groups"])</h1>
+
+<nav class="admin-toolbar">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a asp-route-action="Create" class="btn btn-primary" role="button">@T["Add User Group"]</a>
+        </li>
+    </ul>
+    <form asp-action="Index" method="get" class="form-inline">
+        <input id="search-box" class="form-control mr-sm-2 my-2 my-lg-0" type="text" placeholder="@T["Search"]" autofocus="autofocus">
+        <button type="submit" class="btn btn-secondary">@T["Search"]</button>
+    </form>
+</nav>
+
+@using (Html.BeginForm())
+{
+    <ul class="list-group">
+        @foreach (var entry in Model.UserGroups)
+        {
+            <li class="list-group-item">
+                @await DisplayAsync(entry.Shape)
+            </li>
+        }
+    </ul>
+}
+@await DisplayAsync(Model.Pager)

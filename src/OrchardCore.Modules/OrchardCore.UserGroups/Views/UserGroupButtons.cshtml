@@ -1,0 +1,8 @@
+@model SummaryAdminUserGroupViewModel
+@using OrchardCore.Entities
+@using OrchardCore.Users.Models
+@{
+    var userGroup = Model.UserGroup as UserGroup;
+}
+<a asp-action="Edit" asp-route-id="@userGroup.Id" class="btn btn-primary btn-sm">@T["Edit"]</a>
+<a asp-action="Delete" asp-route-id="@userGroup.Id" class="btn btn-danger btn-sm" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>
