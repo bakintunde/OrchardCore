@@ -1,5 +1,8 @@
 @model dynamic
 
+<script asp-src="~/OrchardCore.UserGroups/Scripts/menu.js" at="Foot" depends-on="admin"></script>
+<style asp-src="~/OrchardCore.UserGroups/Styles/menu.min.css" debug-src="~/OrchardCore.UserGroups/Styles/menu.css"></style>
+
 <div class="edit-item">
     <div class="edit-item-primary">
         @if (Model.Content != null)
@@ -25,3 +28,28 @@
         }
     </div>
 </div>
+
+<ol class="sortable">
+	<li><div>Some content</div></li>
+	<li>
+		<div>Some content</div>
+		<ol>
+			<li><div>Some sub-item content</div></li>
+			<li><div>Some sub-item content</div></li>
+		</ol>
+	</li>
+	<li><div>Some content</div></li>
+</ol>
+
+<script at="Foot">
+
+    $(function () {
+
+		$('.sortable').nestedSortable({
+			handle: 'div',
+			items: 'li',
+			toleranceElement: '> div'
+		});        
+	});
+
+</script>

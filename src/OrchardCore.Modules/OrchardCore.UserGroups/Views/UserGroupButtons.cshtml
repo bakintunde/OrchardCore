@@ -4,5 +4,6 @@
 @{
     var userGroup = Model.UserGroup as UserGroup;
 }
-<a asp-action="Edit" asp-route-id="@userGroup.Id" class="btn btn-primary btn-sm">@T["Edit"]</a>
+<a asp-action="Edit" asp-route-id="@userGroup.Id" class="btn btn-success btn-sm">@T["Edit"]</a>
+<a asp-action="Create" asp-route-parentGroupId="@userGroup.Id" class="btn btn-primary btn-sm">@T["Add Group"]</a>
 <a asp-action="Delete" asp-route-id="@userGroup.Id" class="btn btn-danger btn-sm" itemprop="RemoveUrl UnsafeUrl">@T["Delete"]</a>

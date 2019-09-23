@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using OrchardCore.Users;
+using OrchardCore.Users.Indexes;
+using OrchardCore.Users.Models;
 using YesSql;
 
 public class UserGroupService : IUserGroupService
@@ -14,18 +16,25 @@ public class UserGroupService : IUserGroupService
         _session = session;
     }
 
-    Task<IUserGroup> IUserGroupService.CreateUserGroupAsync(IUserGroup userGroup)
+    public async Task<IUserGroup> FindByIdAsync(int id)
+    {
+        var userGroup = await _session.GetAsync<UserGroup>(id);
+        return userGroup;
+    }
+
+    public Task<IUserGroup> CreateUserGroupAsync(IUserGroup userGroup)
     {
         _session.Save(userGroup);
         return Task.FromResult(userGroup);
     }
 
-    Task IUserGroupService.DeleteUserGroupAsync(string GroupName)
+    Task IUserGroupService.DeleteUserGroupAsync(IUserGroup userGroup)
     {
-        throw new System.NotImplementedException();
+        _session.Delete(userGroup);
+        return Task.FromResult(userGroup);
     }
 
-    Task<IUserGroup> IUserGroupService.GetUserGroupAsync(string GroupName)
+    Task<IUserGroup> IUserGroupService.GetUserGroupAsync(int id)
     {
         throw new System.NotImplementedException();
     }
@@ -37,6 +46,7 @@ public class UserGroupService : IUserGroupService
 
     Task<IUserGroup> IUserGroupService.UpdateUserGroupAsync(IUserGroup userGroup)
     {
-        throw new System.NotImplementedException();
+        _session.Save(userGroup);
+        return Task.FromResult(userGroup);
     }
 }

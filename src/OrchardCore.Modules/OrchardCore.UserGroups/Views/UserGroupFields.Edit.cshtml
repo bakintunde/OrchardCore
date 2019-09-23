@@ -4,6 +4,7 @@
 
 
 <input asp-for="Id" type="hidden" />
+<input type="hidden" asp-for="ParentGroupId" value="@Model.ParentGroupId" />
 
 <fieldset class="form-group">
     <label asp-for="GroupName">@T["Group name"]</label>
