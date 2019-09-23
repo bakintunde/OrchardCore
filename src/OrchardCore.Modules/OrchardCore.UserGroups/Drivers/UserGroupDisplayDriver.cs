@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 using OrchardCore.DisplayManagement.Handlers;
 using OrchardCore.DisplayManagement.Views;
 using OrchardCore.Security.Services;
+using OrchardCore.Users;
 using OrchardCore.Users.Models;
 using OrchardCore.Users.Services;
 using OrchardCore.UserGroups.ViewModels;
@@ -15,7 +16,7 @@ using OrchardCore.Users.ViewModels;
 
 namespace OrchardCore.UserGroups.Drivers
 {
-    public class UserGroupDisplayDriver : DisplayDriver<UserGroup>
+    public class UserGroupDisplayDriver : DisplayDriver<IUserGroup>
     {
         private readonly IStringLocalizer T;
         public UserGroupDisplayDriver(
@@ -24,7 +25,7 @@ namespace OrchardCore.UserGroups.Drivers
             T = stringLocalizer;
         }
 
-        public override IDisplayResult Display(UserGroup userGroup)
+        public override IDisplayResult Display(IUserGroup userGroup)
         {
             return Combine(
                 Initialize<SummaryAdminUserGroupViewModel>("UserGroupFields", model => model.UserGroup = userGroup).Location("SummaryAdmin", "Header:1"),
@@ -32,16 +33,17 @@ namespace OrchardCore.UserGroups.Drivers
             );
         }
 
-        public override Task<IDisplayResult> EditAsync(UserGroup userGroup, BuildEditorContext context)
+        public override Task<IDisplayResult> EditAsync(IUserGroup userGroup, BuildEditorContext context)
         {
             return Task.FromResult<IDisplayResult>(Initialize<EditUserGroupViewModel>("UserGroupFields_Edit", model =>
             {
                 model.Id = userGroup.Id;
                 model.GroupName = userGroup.GroupName;
+                model.ParentGroupId = userGroup.ParentGroupId;
             }).Location("Content:1"));
         }
 
-        public override async Task<IDisplayResult> UpdateAsync(UserGroup userGroup, UpdateEditorContext context)
+        public override async Task<IDisplayResult> UpdateAsync(IUserGroup userGroup, UpdateEditorContext context)
         {
             var model = new EditUserGroupViewModel();
 
@@ -55,6 +57,7 @@ namespace OrchardCore.UserGroups.Drivers
             }
 
             userGroup.GroupName = model.GroupName;
+            userGroup.ParentGroupId = model.ParentGroupId;
             return await EditAsync(userGroup, context);
         }
     }
