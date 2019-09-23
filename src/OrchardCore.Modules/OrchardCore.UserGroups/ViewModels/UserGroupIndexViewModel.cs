@@ -4,15 +4,17 @@ namespace OrchardCore.UserGroups.ViewModels
 {
     public class UserGroupIndexViewModel
     {
-        public IList<UserGroupEntry> UserGroups { get; set; }
-        public UserGroupIndexOptions Options { get; set; }
-        public dynamic Pager { get; set; }
+        public IList<UserGroupEntry> UserGroups { get; set; } = new List<UserGroupEntry>();
+        // public UserGroupIndexOptions Options { get; set; }
+        // public dynamic Pager { get; set; }
     }
 
     public class UserGroupEntry
     {
         public dynamic Shape { get; set; }
-        public bool IsChecked { get; set; }
+        public int GroupId {get;set;}
+        public int? ParentGroupId {get;set;}
+        public List<UserGroupEntry> ChildGroups {get;set;} = new List<UserGroupEntry>();
     }
 
     public class UserGroupIndexOptions
