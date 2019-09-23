@@ -9,6 +9,7 @@ namespace OrchardCore.Users.ViewModels
 
         [Required]
         public string GroupName { get; set; }
+        public int? ParentGroupId {get;set;}
         public List<GroupEntry> ChildGroups { get; set; } = new List<GroupEntry>();
     }
 

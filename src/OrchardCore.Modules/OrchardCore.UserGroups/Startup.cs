@@ -12,6 +12,7 @@ using OrchardCore.Data.Migration;
 using YesSql.Indexes;
 using OrchardCore.DisplayManagement.Handlers;
 using OrchardCore.UserGroups.Drivers;
+using OrchardCore.Users;
 
 namespace OrchardCore.UserGroups
 {
@@ -28,9 +29,9 @@ namespace OrchardCore.UserGroups
             services.AddScoped<IDataMigration, Migrations>();
 
             //View
-            services.AddScoped<IDisplayManager<UserGroup>, DisplayManager<UserGroup>>();
-            services.AddScoped<IDisplayDriver<UserGroup>, UserGroupDisplayDriver>();
-            services.AddScoped<IDisplayDriver<UserGroup>, UserGroupButtonsDisplayDriver>();            
+            services.AddScoped<IDisplayManager<IUserGroup>, DisplayManager<IUserGroup>>();
+            services.AddScoped<IDisplayDriver<IUserGroup>, UserGroupDisplayDriver>();
+            services.AddScoped<IDisplayDriver<IUserGroup>, UserGroupButtonsDisplayDriver>();            
 
             //services
             services.AddScoped<IUserGroupService, UserGroupService>();    
