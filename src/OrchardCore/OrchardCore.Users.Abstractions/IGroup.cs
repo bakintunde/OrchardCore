@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace OrchardCore.Users
 {
     /// <summary>
@@ -5,6 +7,9 @@ namespace OrchardCore.Users
     /// </summary>
     public interface IUserGroup
     {        
-        string GroupName { get; }
+        int Id {get;set;}
+        string GroupName { get; set; }
+        int? ParentGroupId {get;set;}
+        List<int> ChildGroups { get; set; }
     }
 }

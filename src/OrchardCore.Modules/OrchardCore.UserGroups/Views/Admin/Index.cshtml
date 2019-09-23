@@ -1,6 +1,5 @@
 ﻿@model UserGroupIndexViewModel
 
-
 <h1>@RenderTitleSegments(T["User Groups"])</h1>
 
 <nav class="admin-toolbar">
@@ -21,9 +20,11 @@
         @foreach (var entry in Model.UserGroups)
         {
             <li class="list-group-item">
-                @await DisplayAsync(entry.Shape)
+                @await DisplayAsync(entry.Shape)                               
             </li>
+            @if (entry.ChildGroups.Count > 0){
+                <shape type="UserGrouop.SummaryAdmin" Model=entry.Shape />
+            }
         }
     </ul>
 }
-@await DisplayAsync(Model.Pager)
